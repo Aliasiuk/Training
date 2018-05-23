@@ -6,11 +6,12 @@ namespace TaxPark.Classes
 {
     class VehicleBase : IVehicle
     {
-        public VehicleBase(Guid id, AutoBrand autoBrand, string name, DateTime produced, double price, 
+        public VehicleBase(Guid id, string stateCarNumber, AutoBrand autoBrand, string name, DateTime produced, double price,
                            int maximumSpeed, FuelType fuelType, double consumption, int mileage)
 
         {
             Id = id;
+            StateCarNumber = stateCarNumber;
             AutoBrand = autoBrand;
             Name = name;
             Produced = produced;
@@ -22,6 +23,7 @@ namespace TaxPark.Classes
         }
 
         public Guid Id { get; set; }
+        public string StateCarNumber { get; set; }
         public AutoBrand AutoBrand { get; set; }
         public string Name { get; set; }
         public DateTime Produced { get; set; }

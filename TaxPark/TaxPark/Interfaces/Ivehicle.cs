@@ -6,6 +6,7 @@ namespace TaxPark.Interfaces
     interface IVehicle
     {
         Guid Id { get; set; }
+        string StateCarNumber { get; set; }
         AutoBrand AutoBrand { get; set; }
         string Name { get; set; }
         DateTime Produced { get; set; }

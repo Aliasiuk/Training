@@ -6,13 +6,14 @@ namespace TaxPark.Classes
 {
     class Truck : VehicleBase, ITruck
     {
-     public Truck(Guid id, AutoBrand autoBrand, string name, DateTime produced, double price,
+     public Truck(Guid id, string stateCarNumber, AutoBrand autoBrand, string name, DateTime produced, double price,
                            int maximumSpeed, FuelType fuelType, double consumption, int mileage,
                            double cargo, int trunkLenght, int trunkHeight, int trunkWeight)
-   : base(id, autoBrand, name, produced, price, maximumSpeed, fuelType, consumption, mileage)
+   : base(id, stateCarNumber, autoBrand, name, produced, price, maximumSpeed, fuelType, consumption, mileage)
 
         {
             Id = id;
+            StateCarNumber = stateCarNumber;
             AutoBrand = autoBrand;
             Name = name;
             Produced = produced;
