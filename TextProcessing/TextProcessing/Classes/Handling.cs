@@ -23,17 +23,18 @@ namespace TextProcessing.Classes
             //            Sentence sentence = new Sentence();
 
             IList<Sentence> sentencesList = new List<Sentence>();
-            Regex rgx = new Regex("\\s+");
+            Regex rgx = new Regex("\\s+\t");
 
             while ((inputLine = textFile.ReadLine()) != null)
             {
-                string[] inputArray = inputLine.Split(punctuation.PunctuationValue, StringSplitOptions.RemoveEmptyEntries);
+                //                string[] inputArray = inputLine.Split(punctuation.PunctuationValue, StringSplitOptions.RemoveEmptyEntries);
+                string result = rgx.Replace(inputLine, " ");
+                string[] inputArray = result.Split(' ');
                 if (inputArray.Count() > 0)
                 {
                     foreach (string s in inputArray)
                     {
-                        string result = rgx.Replace(s, " ");
-                        sentencesList.Add(new Sentence(result,false,7));
+                        sentencesList.Add(new Sentence(s,false,7));
                     }
                 }
             }
