@@ -54,13 +54,14 @@ namespace TextProcessing
 
                 newTextFile.WriteLine("####################################################################");
 
-                IList< Sentence > sentencesDelWordList = app.GetDeleteWords();
+                IList<Sentence> sentencesDelWordList = app.GetDeleteWords();
                 foreach (Sentence sentenceVar in sentencesDelWordList)
                     newTextFile.WriteLine("{0} # {1}", sentenceVar.NumberOfWords, sentenceVar.SentenceValue);
 
                 newTextFile.WriteLine("####################################################################");
 
-
+                string sentenceReplaceWord = app.GetSentenceReplaceWord(5, "подстрока для замены");
+                newTextFile.WriteLine("### {0}", sentenceReplaceWord);
 
                 newTextFile.WriteLine("####################################################################");
 
@@ -81,6 +82,9 @@ namespace TextProcessing
                 {
                     textFile.Close();
                     newTextFile.Close();
+
+                    Console.WriteLine("Done...");
+                    Console.ReadKey();
                 }
             }
         }

@@ -89,7 +89,7 @@ namespace TextProcessing.Classes
         {
             IList<Sentence> sentencesDelWordList = new List<Sentence>();
 
-            Regex rgxDelete = new Regex(@"\b[цкнгшщзхфвпрлджчсмтб]\s+\b", RegexOptions.IgnoreCase);
+            Regex rgxDelete = new Regex(@"\s+[цкнгшщзхфвпрлджчсмтб]", RegexOptions.IgnoreCase);
 
             foreach (var sentenceVar in Sentences)
             {
@@ -98,6 +98,13 @@ namespace TextProcessing.Classes
             }
 
             return sentencesDelWordList;
+        }
+
+        public string GetSentenceReplaceWord(int sentenceNumber, string substringValue)
+        {
+            Regex rgxReplace = new Regex(@"\b\w{6}\b", RegexOptions.IgnoreCase);
+            string sentenceForReplace = rgxReplace.Replace(Sentences[sentenceNumber].SentenceValue, substringValue);
+            return sentenceForReplace;
         }
     }
 }
