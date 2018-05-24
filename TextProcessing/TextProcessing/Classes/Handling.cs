@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using TextProcessing.Interfaces;
-using TextProcessing.Classes;
 using System.Text.RegularExpressions;
 
 namespace TextProcessing.Classes
@@ -66,7 +63,7 @@ namespace TextProcessing.Classes
             return Sentences.OrderBy(x => x.NumberOfWords).ToList();
         }
 
-        public IList<Word> GetWordsFromInterrogative()
+        public IList<Word> GetWordsFromInterrogative(int wordLength)
         {
             IList<Word> wordInterrogative = new List<Word>();
             string[] inputArray = new string[] { };
@@ -82,14 +79,14 @@ namespace TextProcessing.Classes
                     }
                 }
             }
-            return wordInterrogative.Where(x => x.LengthWord==4).ToList();
+            return wordInterrogative.Where(x => x.LengthWord==wordLength).ToList();
         }
 
         public IList<Sentence> GetDeleteWords()
         {
             IList<Sentence> sentencesDelWordList = new List<Sentence>();
 
-            Regex rgxDelete = new Regex(@"\s+[цкнгшщзхфвпрлджчсмтб]", RegexOptions.IgnoreCase);
+            Regex rgxDelete = new Regex(@"\b[цкнгшщзхфвпрлджчсмтб]\S+\b", RegexOptions.IgnoreCase);
 
             foreach (var sentenceVar in Sentences)
             {

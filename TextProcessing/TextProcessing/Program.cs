@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Configuration;
 using TextProcessing.Classes;
@@ -33,8 +31,6 @@ namespace TextProcessing
                 foreach (var sentenceVar in sentenceList)
                 {
                     newTextFile.WriteLine(sentenceVar.SentenceValue);
-                    //Console.WriteLine("{0} - {1} - {2}", sentenceVar.InterrogativeSentence, sentenceVar.NumberOfWords,
-                    //    sentenceVar.SentenceValue);
                 }
 
                 newTextFile.WriteLine("####################################################################");
@@ -46,7 +42,7 @@ namespace TextProcessing
 
                 newTextFile.WriteLine("####################################################################");
 
-                IList<Word> wordListInterrogative = app.GetWordsFromInterrogative();
+                IList<Word> wordListInterrogative = app.GetWordsFromInterrogative(4);
                 IList<Word> resultList = wordListInterrogative.Distinct<Word>().ToList<Word>();
 
                 foreach (Word wordVar in resultList)
@@ -65,7 +61,7 @@ namespace TextProcessing
 
                 newTextFile.WriteLine("####################################################################");
 
-                Console.ReadKey();
+//                Console.ReadKey();
             }
             catch (InvalidOperationException e)
             {
