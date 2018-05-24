@@ -15,17 +15,43 @@ namespace TextProcessing
         {
             var reader = new AppSettingsReader();
             StreamReader textFile = null;
+            StreamWriter newTextFile = null;
+
             try
             {
                 var pathToFile = reader.GetValue("Key1", typeof(string));
                 var pathToOutputFile = reader.GetValue("Key2", typeof(string));
 
-                Console.WriteLine("Path :   " + pathToFile);
+                Console.WriteLine("Reading file :   " + pathToFile);
                 textFile = new StreamReader(pathToFile.ToString());
+                Console.WriteLine("Writing file :   " + pathToOutputFile);
+                newTextFile = new StreamWriter(pathToOutputFile.ToString());
+
                 Handling app = new Handling();
+
                 IList<Sentence> sentenceList = app.TextParser(textFile);
                 foreach (var sentenceVar in sentenceList)
-                    Console.WriteLine("{0}", sentenceVar.SentenceValue);
+                {
+                    newTextFile.WriteLine(sentenceVar.SentenceValue);
+                    //Console.WriteLine("{0} - {1} - {2}", sentenceVar.InterrogativeSentence, sentenceVar.NumberOfWords,
+                    //    sentenceVar.SentenceValue);
+                }
+
+                newTextFile.WriteLine("####################################################################");
+
+                app.Sentences = sentenceList;
+                IList<Sentence> sentenceListSorted = app.GetSortedSentences();
+                foreach (var sentenceVar in sentenceListSorted)
+                    newTextFile.WriteLine("{0} # {1}", sentenceVar.NumberOfWords, sentenceVar.SentenceValue);
+
+                newTextFile.WriteLine("####################################################################");
+
+                IList<Sentence> sentenceListInterrogative = app.GetWordsFromInterrogative();
+                foreach (var sentenceVar in sentenceListInterrogative)
+                {
+
+                }
+
 
                 Console.ReadKey();
             }
@@ -43,6 +69,7 @@ namespace TextProcessing
                 if (textFile != null)
                 {
                     textFile.Close();
+                    newTextFile.Close();
                 }
             }
         }

@@ -8,7 +8,14 @@ namespace TextProcessing.Classes
 {
     class Word
     {
-        string WordValue { get; }
-        int LengthWord { get { return WordValue.Length; } }
+        public Word(string wordValue, int lengthWord)
+
+        {
+            WordValue = wordValue;
+            LengthWord = lengthWord;
+        }
+
+        public string WordValue { get; set; }
+        public int LengthWord { get; set; }
     }
 }

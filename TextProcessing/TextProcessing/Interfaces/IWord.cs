@@ -8,7 +8,7 @@ namespace TextProcessing.Interfaces
 {
     interface IWord : ISymbol
     {
-        string WordValue { get; }
-        int LengthWord { get; }
+        string WordValue { get; set; }
+        int LengthWord { get; set; }
     }
 }
