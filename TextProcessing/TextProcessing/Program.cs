@@ -46,12 +46,23 @@ namespace TextProcessing
 
                 newTextFile.WriteLine("####################################################################");
 
-                IList<Sentence> sentenceListInterrogative = app.GetWordsFromInterrogative();
-                foreach (var sentenceVar in sentenceListInterrogative)
-                {
+                IList<Word> wordListInterrogative = app.GetWordsFromInterrogative();
+                IList<Word> resultList = wordListInterrogative.Distinct<Word>().ToList<Word>();
 
-                }
+                foreach (Word wordVar in resultList)
+                    newTextFile.WriteLine("{0} # {1}", wordVar.LengthWord, wordVar.WordValue);
 
+                newTextFile.WriteLine("####################################################################");
+
+                IList< Sentence > sentencesDelWordList = app.GetDeleteWords();
+                foreach (Sentence sentenceVar in sentencesDelWordList)
+                    newTextFile.WriteLine("{0} # {1}", sentenceVar.NumberOfWords, sentenceVar.SentenceValue);
+
+                newTextFile.WriteLine("####################################################################");
+
+
+
+                newTextFile.WriteLine("####################################################################");
 
                 Console.ReadKey();
             }

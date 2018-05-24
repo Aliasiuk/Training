@@ -66,9 +66,38 @@ namespace TextProcessing.Classes
             return Sentences.OrderBy(x => x.NumberOfWords).ToList();
         }
 
-        public IList<Sentence> GetWordsFromInterrogative()
+        public IList<Word> GetWordsFromInterrogative()
         {
-            return Sentences.Where(x => x.InterrogativeSentence==true).ToList();
+            IList<Word> wordInterrogative = new List<Word>();
+            string[] inputArray = new string[] { };
+
+            foreach (var sentenceVar in Sentences)
+            {
+                if (sentenceVar.InterrogativeSentence)
+                {
+                    inputArray = sentenceVar.SentenceValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string word in inputArray)
+                    {
+                        wordInterrogative.Add(new Word(word, word.Length));
+                    }
+                }
+            }
+            return wordInterrogative.Where(x => x.LengthWord==4).ToList();
+        }
+
+        public IList<Sentence> GetDeleteWords()
+        {
+            IList<Sentence> sentencesDelWordList = new List<Sentence>();
+
+            Regex rgxDelete = new Regex(@"\b[цкнгшщзхфвпрлджчсмтб]\s+\b", RegexOptions.IgnoreCase);
+
+            foreach (var sentenceVar in Sentences)
+            {
+                string myResult = rgxDelete.Replace(sentenceVar.SentenceValue, "");
+                sentencesDelWordList.Add(new Sentence(myResult, sentenceVar.InterrogativeSentence, sentenceVar.NumberOfWords));
+            }
+
+            return sentencesDelWordList;
         }
     }
 }
